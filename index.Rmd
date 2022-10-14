@@ -63,9 +63,8 @@ Row {data-height=500}
 -------------------------------------
 ###
 
-```{r, echo = FALSE}
+```{r map}
 
-`%>%` <- magrittr::`%>%`
 
  leaflet::leaflet() %>%
     leaflet::addTiles() %>%
@@ -84,3 +83,16 @@ Information {data-orientation=rows data-icon="fa-info-circle"}
 
 
 #### Contact
+
+<!-- $(document).ready(function () { -->
+<!--   FlexDashboard.init({ -->
+<!--     theme: "paper", -->
+<!--     fillPage: true, -->
+<!--     orientation: "columns", -->
+<!--     storyboard: false, -->
+<!--     defaultFigWidth: 576, -->
+<!--     defaultFigHeight: 460, -->
+<!--     defaultFigWidthMobile: 360, -->
+<!--     defaultFigHeightMobile: 460 -->
+<!--   }); -->
+<!-- }); -->
