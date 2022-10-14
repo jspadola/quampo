@@ -1,0 +1,4 @@
+7c6a40f5a9652976fdec6663c0d06b95 manifest-md5.txt
+152d87e3779b619f6f3aeb395e1c34f9 pid-mapping.txt
+e80ae2631bd7592fb74e821fc1150f27 bag-info.txt
+9e5ad981e0d29adc278f6a294b8c2aca bagit.txt

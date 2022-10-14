@@ -1,34 +1,23 @@
 ---
 title: "Quampo"
-output :
+output: 
   flexdashboard::flex_dashboard:
     orientation: rows
-    leafletmap: true
-    mathjax: NULL
-    self_contained: FALSE
 ---
 
 ```{r setup, include=FALSE}
 library(flexdashboard)
-library(knitr)
-library(leaflet)
-library(dplyr)
-library(sf)
-library(crosstalk)
-library(lubridate)
-library(ggplot2)
-library(plotly)
 library(tidyverse)
-library(patchwork)
-library(dygraphs)
 
-  hobo_data <- readxl::read_xlsx("Hobo_2020-2022 QUAMPO.xlsx")
-  hobo_data$`Date Heure` <- as.Date(hobo_data$`Date Heure`)
-  hobo_data$Year <- lubridate::year(hobo_data$`Date Heure`)
-  hobo_data <- as.data.frame(hobo_data)
-  colnames(hobo_data)[2] <- "Date"
- 
-  sd    <- crosstalk::SharedData$new(hobo_data)
+# Read temperature data
+hobo    <- readRDS(file = here::here("data/hobo_data.RDS"))
+
+# Read 
+ports_m <- sf::st_read(dsn = here::here("data/ports_markers.shp"))
+
+# Put data in a shared environment
+hobo_sd <- crosstalk::SharedData$new(hobo)
+  
   
 ```
 
@@ -39,7 +28,7 @@ Inputs {.sidebar}
 -----------------------------------------------------------------------
 ```{r}
 
-crosstalk::filter_select("Sélectionnez un port", "Sélectionnez un port", sd, ~Site, multiple = FALSE)
+crosstalk::filter_select("Sélectionnez un port", "Sélectionnez un port", hobo_sd, ~Site, multiple = FALSE)
 
 ```
 
@@ -50,8 +39,8 @@ Row {data-height=500}
 ```{r, echo = FALSE, include=TRUE, , fig.keep='all', fig.show='asis'}
 
 
-dygraphs::dygraph(sd, main = "Température des eaux") %>% 
-  dygraphs::dyRangeSelector(dateWindow = c("2019-12-01", "2021-05-01"))
+# dygraphs::dygraph(sd, main = "Température des eaux") %>% 
+#   dygraphs::dyRangeSelector(dateWindow = c("2019-12-01", "2021-05-01"))
 # 
 # scatterplot <- plot_ly(sd, x = ~Date, y = ~Temperature) %>%
 #   layout(dragmode = "select")
@@ -76,19 +65,13 @@ Row {data-height=500}
 
 ```{r, echo = FALSE}
 
-id_ports <- c("Saint-Florent", "Ile Rousse", "Calvi", "STARESO")
-  lat <- c("42.681846", "42.636572", "42.566667","42.580178")
-  long <- c("9.303704","8.935399","8.750000", "8.724331")
+`%>%` <- magrittr::`%>%`
 
-  d <- data.frame(id_ports,lat,long)
-  d_sf <- sf::st_as_sf(d, coords = c("long","lat"), crs = "WGS84")
-
-
- leaflet::leaflet() %>% 
-    leaflet::addTiles() %>% 
+ leaflet::leaflet() %>%
+    leaflet::addTiles() %>%
     leaflet::setView(lng = 8.73, lat = 42, zoom = 7.5) %>%
-    leaflet::addMarkers(data = d_sf)
- 
+    leaflet::addMarkers(data = ports_m)
+
 ```
 
 Information {data-orientation=rows data-icon="fa-info-circle"}
