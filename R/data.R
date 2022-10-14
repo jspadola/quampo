@@ -224,6 +224,21 @@
     
     }#eo data_hobo
   
+  data_ports <- function() {
+    
+        id       <- c("Saint-Florent", "Ile Rousse", "Calvi", "STARESO")
+        lat      <- c("42.681846", "42.636572", "42.566667","42.580178")
+        long     <- c("9.303704","8.935399","8.750000", "8.724331")
+
+        ports    <- data.frame(id,lat,long)
+        ports_sf <- sf::st_as_sf(ports, coords = c("long","lat"), crs = "WGS84")
+        
+        if (!file.exists(here::here("data/ports_markers.shp"))) {
+        
+       sf::st_write(ports_sf, here::here("data/ports_markers.shp"))
+        }#eo if
+    
+  }#eo data_ports
   
   
   # for shiny

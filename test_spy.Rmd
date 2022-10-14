@@ -9,8 +9,11 @@ output:
 library(flexdashboard)
 library(tidyverse)
 
-# Read data
+# Read temperature data
 hobo    <- readRDS(file = here::here("data/hobo_data.RDS"))
+
+# Read 
+ports_m <- sf::st_read(dsn = here::here("data/ports_markers.shp"))
 
 # Put data in a shared environment
 hobo_sd <- crosstalk::SharedData$new(hobo)
@@ -62,19 +65,11 @@ Row {data-height=500}
 
 ```{r, echo = FALSE}
 
-# id_ports <- c("Saint-Florent", "Ile Rousse", "Calvi", "STARESO")
-#   lat <- c("42.681846", "42.636572", "42.566667","42.580178")
-#   long <- c("9.303704","8.935399","8.750000", "8.724331")
-# 
-#   d <- data.frame(id_ports,lat,long)
-#   d_sf <- sf::st_as_sf(d, coords = c("long","lat"), crs = "WGS84")
-# 
-# 
-#  leaflet::leaflet() %>% 
-#     leaflet::addTiles() %>% 
-#     leaflet::setView(lng = 8.73, lat = 42, zoom = 7.5) %>%
-#     leaflet::addMarkers(data = d_sf)
- 
+ leaflet::leaflet() %>%
+    leaflet::addTiles() %>%
+    leaflet::setView(lng = 8.73, lat = 42, zoom = 7.5) %>%
+    leaflet::addMarkers(data = ports_m)
+
 ```
 
 Information {data-orientation=rows data-icon="fa-info-circle"}
