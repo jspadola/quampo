@@ -206,15 +206,25 @@
 ################################################################################
 ################################################################################
   
-  # Prepare data ====
-  hobo_data <- as.data.frame(readxl::read_xlsx("Hobo_2020-2022 QUAMPO.xlsx"))
-  hobo_data$`Date Heure` <- as.Date(hobo_data$`Date Heure`)
-  hobo_data$Year <- lubridate::year(hobo_data$`Date Heure`)
+  data_hobo <- function() { 
+    
+    # path
+    hobo_dir  <- here::here("data")
+
+    hobo_data <- readxl::read_xlsx(paste0(hobo_dir,"/","Hobo_2020-2022 QUAMPO.xlsx"))
+    hobo_data$`Date Heure` <- as.Date(hobo_data$`Date Heure`)
+    hobo_data$Year <- lubridate::year(hobo_data$`Date Heure`)
+    hobo_data <- as.data.frame(hobo_data)
+    colnames(hobo_data)[2] <- "Date"
+    
+    if (!file.exists(paste0(hobo_dir,"/","hobo_data.RDS"))) {
+      
+      saveRDS(hobo_data, file = paste0(hobo_dir,"/","hobo_data.RDS"))
+    }#eo if
+    
+    }#eo data_hobo
   
-  ## Temperature data ====
-  .hobo_data <- readxl::read_xlsx("Hobo_2020-2022 QUAMPO.xlsx")
-  .hobo_data$`Date Heure` <- as.Date(.hobo_data$`Date Heure`)
-  .hobo_data$Year <- lubridate::year(.hobo_data$`Date Heure`)
+  
   
   # for shiny
   # updateSelectInput(inputId = "port", choices = unique(.hobo_data$Site))

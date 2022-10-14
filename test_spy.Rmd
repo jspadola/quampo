@@ -8,29 +8,82 @@ output:
 ```{r setup, include=FALSE}
 library(flexdashboard)
 library(tidyverse)
+
+# Read data
+hobo    <- readRDS(file = here::here("data/hobo_data.RDS"))
+
+# Put data in a shared environment
+hobo_sd <- crosstalk::SharedData$new(hobo)
+  
+  
 ```
 
-Column {data-width=650}
+Résultats
+=====================================  
+
+Inputs {.sidebar}
 -----------------------------------------------------------------------
-
-### Chart A
-
 ```{r}
+
+crosstalk::filter_select("Sélectionnez un port", "Sélectionnez un port", hobo_sd, ~Site, multiple = FALSE)
 
 ```
 
-Column {data-width=350}
------------------------------------------------------------------------
+Row {data-height=500}
+-------------------------------------
+###
 
-### Chart B
+```{r, echo = FALSE, include=TRUE, , fig.keep='all', fig.show='asis'}
 
-```{r}
 
+# dygraphs::dygraph(sd, main = "Température des eaux") %>% 
+#   dygraphs::dyRangeSelector(dateWindow = c("2019-12-01", "2021-05-01"))
+# 
+# scatterplot <- plot_ly(sd, x = ~Date, y = ~Temperature) %>%
+#   layout(dragmode = "select")
+# 
+# scatterplot
+  
+      # p <- ggplot(sd, aes(x = Date,  y = Temperature)) + geom_line()
+# + annotate(
+# "rect",
+# xmin = as.Date("2019-12-01"), xmax = as.Date("2021-05-01"),
+# ymin = -Inf, ymax = +Inf, fill = alpha("purple", .25)
+#       ) + ggtitle("Suivi de température dans les eaux") + theme(plot.title = element_text(hjust = 0.5)) + xlab("Date") + ylab("Température (en °C)")
+
+    # plotly::ggplotly(p) %>%
+    #   plotly::partial_bundle()
+    
+```
+ 
+Row {data-height=500}
+-------------------------------------
+###
+
+```{r, echo = FALSE}
+
+# id_ports <- c("Saint-Florent", "Ile Rousse", "Calvi", "STARESO")
+#   lat <- c("42.681846", "42.636572", "42.566667","42.580178")
+#   long <- c("9.303704","8.935399","8.750000", "8.724331")
+# 
+#   d <- data.frame(id_ports,lat,long)
+#   d_sf <- sf::st_as_sf(d, coords = c("long","lat"), crs = "WGS84")
+# 
+# 
+#  leaflet::leaflet() %>% 
+#     leaflet::addTiles() %>% 
+#     leaflet::setView(lng = 8.73, lat = 42, zoom = 7.5) %>%
+#     leaflet::addMarkers(data = d_sf)
+ 
 ```
 
-### Chart C
+Information {data-orientation=rows data-icon="fa-info-circle"}
+=====================================
 
-```{r}
+### Comment utiliser cet outil ?
 
-```
 
+### À propos
+
+
+#### Contact
