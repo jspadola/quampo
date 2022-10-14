@@ -3,13 +3,11 @@ title: "Untitled"
 output: 
   flexdashboard::flex_dashboard:
     orientation: rows
-    runtime: shiny
 ---
 
 ```{r setup, include=FALSE}
 library(flexdashboard)
 library(tidyverse)
-library(shiny)
 ```
 
 Column {data-width=650}
@@ -18,13 +16,6 @@ Column {data-width=650}
 ### Chart A
 
 ```{r}
-
-if (interactive()) {
-
-sd <- SharedData$new(chickwts)
-filter_select("feedtype", "Feed type", sd, "feed")
-
-}
 
 ```
 
