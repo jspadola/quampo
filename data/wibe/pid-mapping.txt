@@ -1,0 +1,11 @@
+urn:uuid:99abf52c-b271-4b66-ae50-c504e492bc4c (pdf)	data/metadata4780885986920582565.pdf
+urn:uuid:f9ae4955-a626-4bbb-b09e-feee9ba269a2	data/Sampling_stations.csv
+urn:uuid:fac2f862-aa34-419a-9458-7889c6ec6a34	data/ConceptualDataModel.jpg
+urn:uuid:92c16be1-e53e-4d91-a3c4-87b786d4a6fd	data/Water_samples_measurements.csv
+urn:uuid:e28076cd-dba8-4a0b-8ede-c904fb760a53	data/Field_organisms_samples.csv
+urn:uuid:41a54a7d-d4ee-4248-98b9-24aa487c48e5	data/Project.csv
+urn:uuid:49174e2a-35fa-4d48-8591-4a4defcd4e1d	data/Fieldwork.csv
+urn:uuid:a077ffa4-f628-49a2-a60f-549197e528ed	data/WIBE_Data_Dictionary.csv
+urn:uuid:99abf52c-b271-4b66-ae50-c504e492bc4c	data/CoastWIBE_database_Coastal_Water_Interdisciplinarity_Biomarkers.xml
+resource_map_urn:uuid:7bf52280-5ed6-48e5-b857-a4f9adecb90f	data/resource_map_urn_uuid_7bf52280-5ed6-48e5-b857-a4f9adecb90f.rdf.xml
+urn:uuid:d3832e1c-b2ac-4da7-bc3b-e21427ac9ec0	data/TAXREF.csv

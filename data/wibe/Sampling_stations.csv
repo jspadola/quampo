@@ -1,0 +1,16 @@
+﻿Sampling_station_ID;Sampling_station_latitude_value;Sampling_station_longitude_value;Sampling_station_geonames_name;Sampling_station_common_name;Sampling_station_administrator_name;Sampling_station_label_name;Sampling_station_berth_number;Sampling_station_municipality_name
+Calvi_port;42.56726;8.76163;Calvi Port;Xavier Colonna Port;Philippe Gabrielli;Pavillon bleu;500;Calvi
+Calvi_fairing;42.56359;8.75694;Calvi Port;Xavier Colonna Port;Philippe Gabrielli;Pavillon bleu;500;Calvi
+Calvi_oil;42.56439;8.75768;Calvi Port;Xavier Colonna Port;Philippe Gabrielli;Pavillon bleu;500;Calvi
+Ile_rousse_port;42.64151;8.93639;Ile Rousse Port;Ile Rousse Port;Jean-Simon Savelli;NA;250;L'Île Rousse
+Ile_rousse_fairing;42.64023;8.93554;Ile Rousse Port;Ile Rousse Port;Jean-Simon Savelli;NA;250;L'Île Rousse
+Ile_rousse_oil;42.68098;9.29799;Ile Rousse Port;Ile Rousse Port;Jean-Simon Savelli;NA;250;L'Île Rousse
+St_florent_port;42.67993;9.30031;Port Saint Florent;St-Florent Port;David Donnini;Port propre and Pavillon bleu;950;Saint Florent
+St_florent_fairing;42.57386;8.75607;Port Saint Florent;St-Florent Port;David Donnini;Port propre and Pavillon bleu;950;Saint Florent
+St_florent_oil;42.68093;9.29801;Port Saint Florent;St-Florent Port;David Donnini;Port propre and Pavillon bleu;950;Saint Florent
+STARESO_port;42.58044;8.72542;NA;Station de Recherches Sous-marines et Océanographiques;Pierre Lejeune;Not applicable;4;Calvi
+Diana_mussel_farm;42.07478;9.30593;NA;SARL Étang de Diana;Bernard Pantalacci;Not applicable;Not applicable;Aléria
+L'Houmeau_marsh_reference;46.20382;-1.19539;L'Houmeau;Marsh;Emmanuel Dubillot;Not applicable;Not applicable;L'Houmeau
+Minimes_fairing;46.14675;-1.16187;Les Minimes;CAR;Bertrand Moquay;Pavillon bleu;4500;La Rochelle
+Minimes_rain_waters;46.14143;-1.16605;Les Minimes;PLU;Bertrand Moquay;Pavillon bleu;4500;La Rochelle
+Minimes_oil;46.14688;-1.16749;Les Minimes;NFS;Bertrand Moquay;Pavillon bleu;4500;La Rochelle

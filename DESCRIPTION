@@ -1,0 +1,34 @@
+Package: quampo
+Title: QUAMPO APP
+Version: 1.0.0.0
+Authors@R: 
+    c(person(given = "Joseph",
+           family = "Spadola",
+           role = c("aut"),
+           email = "spadola.j@gmail.com"))
+Description: Creating an app to visualize QUAMPO project results.
+License: MIT + file LICENSE
+ByteCompile: true
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.1
+Imports:
+  here,
+  flexdashboard,
+  leaflet,
+  plyr,
+  sf,
+  dplyr,
+  magrittr,
+  DT,
+  crosstalk,
+  readxl,
+  lubridate,
+  plotly,
+  tidyverse,
+  gridExtra,
+  patchwork,
+  knitr,
+  dygraphs
+Remotes:
