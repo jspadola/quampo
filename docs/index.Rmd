@@ -1,0 +1,140 @@
+---
+title: "QUAMPO"
+output: 
+  flexdashboard::flex_dashboard:
+    storyboard: true
+    social: menu
+    source: embed
+---
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(magrittr)
+library(plotly)
+library(crosstalk)
+library(dygraphs)
+library(leaflet)
+
+devtools::load_all()
+
+# Read temperature data
+temp    <- readRDS(file = here::here("data/hobo_data.RDS"))
+ibr     <- readRDS(file = here::here("data/ibr_data.RDS"))
+
+
+ibr_mussel <- ibr[ibr$specie %in% "limpet",]
+ibr_limpet <- ibr[ibr$specie %in% "mussel",]
+  
+
+# Read 
+ports_m <- sf::st_read(dsn = here::here("data/ports_markers.shp"))
+
+# Put data in a shared environment
+temp_sd        <- crosstalk::SharedData$new(temp, key = ~site)
+ibr_mussel_sd  <- crosstalk::SharedData$new(ibr_mussel, key = ~site, group = "xyz")
+ibr_limpet_sd  <- crosstalk::SharedData$new(ibr_limpet, key = ~site, group = "xyz")
+```
+
+
+Calvi
+===================================== 
+Row {data-height=500}
+-------------------------------------
+###
+```{r map1}
+
+ leaflet::leaflet() %>%
+    leaflet::addTiles() %>%
+    leaflet::setView(lng = 8.77, lat = 42.57, zoom = 13) %>%
+    leaflet::addMarkers(data = ports_m[ports_m$id %in% "Calvi",])
+
+```
+
+Row {data-height=500}
+-------------------------------------
+###
+```{r dy1}
+
+plot_tp(port = "Calvi")
+```
+
+L'Île Rousse
+===================================== 
+Row {data-height=500}
+-------------------------------------
+###
+```{r map2}
+
+
+ leaflet::leaflet() %>%
+    leaflet::addTiles() %>%
+    leaflet::setView(lng = 8.94, lat = 42.64, zoom = 13) %>%
+    leaflet::addMarkers(data = ports_m[ports_m$id %in% "Ile Rousse",])
+
+```
+Row {data-height=500}
+-------------------------------------
+###
+```{r dy2}
+
+plot_tp(port = "Ile Rousse")
+```
+
+Saint-Florent
+===================================== 
+Row {data-height=500}
+-------------------------------------
+###
+```{r map3}
+
+ leaflet::leaflet() %>%
+    leaflet::addTiles() %>%
+    leaflet::setView(lng = 9.29, lat = 42.69, zoom = 13) %>%
+    leaflet::addMarkers(data = ports_m[ports_m$id %in% "Saint-Florent",])
+
+```
+Row {data-height=500}
+-------------------------------------
+###
+```{r dy3}
+
+plot_tp(port = "Saint-Florent")
+```
+
+STARESO
+===================================== 
+Row {data-height=500}
+-------------------------------------
+###
+```{r map4}
+
+leaflet::leaflet() %>%
+    leaflet::addTiles() %>%
+    leaflet::setView(lng = 8.72, lat = 42.58, zoom = 13) %>%
+    leaflet::addMarkers(data =ports_m[ports_m$id %in% "STARESO",])
+
+```
+
+Row {data-height=500}
+-------------------------------------
+###
+```{r dy4}
+
+plot_tp(port = "STARESO")
+```
+
+
+
+Information {data-orientation=rows data-icon="fa-info-circle"}
+=====================================
+
+### Comment utiliser cet outil ?
+
+
+### À propos
+
+
+#### Contact
+
+
+

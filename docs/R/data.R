@@ -171,7 +171,30 @@
     # lower colnames
     names(wsm) <- tolower(names(wsm))
     
-    return(wsm)
+    # keep only data relative to QUAMPO project
+    wsm <- wsm[grepl("QUAMPO", wsm$water_sample_id),]
+    
+    # create a date column
+    wsm$date <- as.Date(substr(wsm$fieldwork_id, 1, 10))
+    
+    # create a site column
+    wsm$site <- substr(wsm$fieldwork_id, 12, nchar(wsm$fieldwork_id))
+    
+    # turn NA in "NA"
+    wsm <- as.data.frame(lapply(wsm, function(x) stringr::str_replace_na(x, replacement = "NA")))
+    
+    # Retrieve columns including only unknown values
+    uknw_v <-lapply(wsm, function(x) length(which(x %in%  c("NA", "LD", "LQ", "NP"))))
+    uknw_v <- as.vector(unlist(uknw_v))
+    uknw_c <- which(uknw_v == dim(wsm)[1])
+    
+    # Delete columns including only unknown values
+    wsm <- wsm[, -uknw_c]
+    
+    if (!file.exists(paste0(here::here("data"),"/","wsm_data.RDS"))) {
+      
+      saveRDS(wsm, file = paste0(here::here("data"),"/","wsm_data.RDS"))
+    }#eo if)
     
   }#eo data_wsm
   
@@ -235,13 +258,29 @@
     ibr_data$SD   <- as.numeric(ibr_data$SD)
     ibr_data$year <- lubridate::year(gsub(".*(.{4})$", "\\1-01-01", ibr_data$date))
     ibr_data$date <- lubridate::my(ibr_data$date)
+    ibr_data      <- as.data.frame(ibr_data)
     
     if (!file.exists(paste0(here::here("data"),"/","ibr_data.RDS"))) {
       
       saveRDS(ibr_data, file = paste0(here::here("data"),"/","ibr_data.RDS"))
     }#eo if
     
-  }
+  }#eo data_ibr
+  
+  data_stress <- function() {
+    
+    strs_data <- readxl::read_xlsx(paste0(here::here("data"),"/","2022_06_15 moy_sd_biomeffect_col.xlsx"))
+    strs_data <- strs_data[,-1]
+    strs_data$date <- lubridate::my(strs_data$date)
+    strs_data      <- as.data.frame(strs_data)
+    
+    if (!file.exists(paste0(here::here("data"),"/","strs_data.RDS"))) {
+      
+      saveRDS(ibr_data, file = paste0(here::here("data"),"/","strs_data.RDS"))
+    }#eo if
+     
+    
+  }#eo data stress
   
   data_ports <- function() {
     

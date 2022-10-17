@@ -90,6 +90,19 @@ id_ports <- c("Saint-Florent", "Ile Rousse", "Calvi", "STARESO")
     leaflet::addMarkers(data = d_sf)
  
 ```
+Calvi
+=====================================  
+
+L'Île Rousse
+=====================================
+
+Saint-Florent
+=====================================
+
+STARESO
+=====================================  
+
+
 
 Information {data-orientation=rows data-icon="fa-info-circle"}
 =====================================

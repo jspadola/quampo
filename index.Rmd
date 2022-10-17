@@ -15,8 +15,8 @@ temp    <- readRDS(file = here::here("data/hobo_data.RDS"))
 ibr     <- readRDS(file = here::here("data/ibr_data.RDS"))
 
 
-  ibr_mussel <- ibr[ibr$specie %in% "limpet",]
-  ibr_limpet <- ibr[ibr$specie %in% "mussel",]
+ibr_mussel <- ibr[ibr$specie %in% "limpet",]
+ibr_limpet <- ibr[ibr$specie %in% "mussel",]
   
 
 # Read 
@@ -38,7 +38,8 @@ Inputs {.sidebar}
 ```{r}
 
 crosstalk::filter_select("Sélectionnez un port", "Sélectionnez un port", temp_sd, ~site, multiple = FALSE)
-# crosstalk::filter_select("Sélectionnez une variable", "Sélectionnez un port", ibr_mussel_sd, ~site, multiple = FALSE)
+
+crosstalk::filter_select("Sélectionnez une variable", "Sélectionnez une variable", ibr_mussel_sd, ~site, multiple = FALSE)
 
 
 ```

@@ -31,4 +31,5 @@ Imports:
   patchwork,
   knitr,
   dygraphs,
+  stringr
 Remotes:
