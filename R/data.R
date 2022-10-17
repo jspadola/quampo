@@ -208,21 +208,40 @@
   
   data_hobo <- function() { 
     
-    # path
-    hobo_dir  <- here::here("data")
-
-    hobo_data <- readxl::read_xlsx(paste0(hobo_dir,"/","Hobo_2020-2022 QUAMPO.xlsx"))
+    hobo_data <- readxl::read_xlsx(paste0(here::here("data"),"/","Hobo_2020-2022 QUAMPO.xlsx"))
     hobo_data$`Date Heure` <- as.Date(hobo_data$`Date Heure`)
     hobo_data$Year <- lubridate::year(hobo_data$`Date Heure`)
     hobo_data <- as.data.frame(hobo_data)
-    colnames(hobo_data)[2] <- "Date"
+    # colnames(hobo_data)[2] <- "Date"
     
-    if (!file.exists(paste0(hobo_dir,"/","hobo_data.RDS"))) {
+    hobo_mn <- as.data.frame(tapply(hobo_data$Temperature, list(hobo_data$`Date Heure`, hobo_data$Site), mean))
+    hobo_sd <- as.data.frame(tapply(hobo_data$Temperature, list(hobo_data$`Date Heure`, hobo_data$Site), sd))
+    
+    hobo_data <- data.frame(rows = as.Date(row.names(hobo_mn)), stack(hobo_mn), stack(hobo_sd)[,"values"])
+    colnames(hobo_data) <- c("date", "tp_mn", "site", "tp_sd")
+    hobo_data <- hobo_data[,c("site", "date", "tp_mn", "tp_sd")]
+    
+    if (!file.exists(paste0(here::here("data"),"/","hobo_data.RDS"))) {
       
-      saveRDS(hobo_data, file = paste0(hobo_dir,"/","hobo_data.RDS"))
+      saveRDS(hobo_data, file = paste0(here::here("data"),"/","hobo_data.RDS"))
     }#eo if
     
     }#eo data_hobo
+  
+  data_ibr <- function() {
+    
+    ibr_data      <- readxl::read_xlsx(paste0(here::here("data"),"/", "2022_IBR_allports.xlsx"), sheet = 1)
+    ibr_data$IBR  <- as.numeric(ibr_data$IBR)
+    ibr_data$SD   <- as.numeric(ibr_data$SD)
+    ibr_data$year <- lubridate::year(gsub(".*(.{4})$", "\\1-01-01", ibr_data$date))
+    ibr_data$date <- lubridate::my(ibr_data$date)
+    
+    if (!file.exists(paste0(here::here("data"),"/","ibr_data.RDS"))) {
+      
+      saveRDS(ibr_data, file = paste0(here::here("data"),"/","ibr_data.RDS"))
+    }#eo if
+    
+  }
   
   data_ports <- function() {
     

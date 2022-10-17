@@ -11,13 +11,21 @@ library(tidyverse)
 library(magrittr)
 
 # Read temperature data
-hobo    <- readRDS(file = here::here("data/hobo_data.RDS"))
+temp    <- readRDS(file = here::here("data/hobo_data.RDS"))
+ibr     <- readRDS(file = here::here("data/ibr_data.RDS"))
+
+
+  ibr_mussel <- ibr[ibr$specie %in% "limpet",]
+  ibr_limpet <- ibr[ibr$specie %in% "mussel",]
+  
 
 # Read 
 ports_m <- sf::st_read(dsn = here::here("data/ports_markers.shp"))
 
 # Put data in a shared environment
-hobo_sd <- crosstalk::SharedData$new(hobo)
+temp_sd        <- crosstalk::SharedData$new(temp, key = ~site)
+ibr_mussel_sd  <- crosstalk::SharedData$new(ibr_mussel, key = ~site, group = "xyz")
+ibr_limpet_sd  <- crosstalk::SharedData$new(ibr_limpet, key = ~site, group = "xyz")
   
   
 ```
@@ -29,7 +37,9 @@ Inputs {.sidebar}
 -----------------------------------------------------------------------
 ```{r}
 
-crosstalk::filter_select("Sélectionnez un port", "Sélectionnez un port", hobo_sd, ~Site, multiple = FALSE)
+crosstalk::filter_select("Sélectionnez un port", "Sélectionnez un port", temp_sd, ~site, multiple = FALSE)
+# crosstalk::filter_select("Sélectionnez une variable", "Sélectionnez un port", ibr_mussel_sd, ~site, multiple = FALSE)
+
 
 ```
 
@@ -39,24 +49,48 @@ Row {data-height=500}
 
 ```{r, echo = FALSE, include=TRUE, , fig.keep='all', fig.show='asis'}
 
-
 # dygraphs::dygraph(sd, main = "Température des eaux") %>% 
 #   dygraphs::dyRangeSelector(dateWindow = c("2019-12-01", "2021-05-01"))
 # 
-scatterplot <- plotly::plot_ly(hobo_sd, x = ~Date, y = ~Temperature)
-  # layout(dragmode = "select")
+ p  <- plotly::plot_ly(temp_sd,
+                       x = ~date,
+                       y = ~tp_mn,
+                       type = "scatter",
+                       mode = "lines")
 
-scatterplot
-  
-# p <- ggplot(hobo_sd$data(), aes(x = Date,  y = Temperature)) + geom_line()
-# + annotate(
+ p <- p %>% plotly::layout(title = 'Suivi de la température des eaux portuaires',
+                           plot_bgcolor = "#e5ecf6",
+                           xaxis = list(title = 'Date'), 
+                           yaxis = list(title = 'Température (°C)'))
+
+ p
+
+# p <- ggplot2::ggplot(temp_sd$data(), ggplot2::aes(x = date,  y = tp_mn)) + geom_line() 
+#   annotate(
 # "rect",
 # xmin = as.Date("2019-12-01"), xmax = as.Date("2021-05-01"),
 # ymin = -Inf, ymax = +Inf, fill = alpha("purple", .25)
 #       ) + ggtitle("Suivi de température dans les eaux") + theme(plot.title = element_text(hjust = 0.5)) + xlab("Date") + ylab("Température (en °C)")
+
 # 
-#     plotly::ggplotly(p) %>%
-#       plotly::partial_bundle()
+    # plotly::ggplotly(p, dynamicTicks = TRUE) %>%
+    #   plotly::partial_bundle()
+
+# p1 <- plotly::plot_ly(ibr_mussel_sd, x = ~date, y = ~IBR)
+# p2 <- plotly::plot_ly(ibr_limpet_sd, x = ~date, y = ~IBR)
+# 
+# pf <- plotly::subplot(p1, p2)
+# pf
+    
+  #   p1 <- ggplot(ibr_mussel, aes(x = date,  y = IBR)) + geom_errorbar(aes(ymin = IBR-SD, ymax = IBR+SD), width = 0.2) +  xlab("Date") + ylab("IBR pour Mytilus galloprovincialis")
+  # 
+  # p2 <- ggplot(ibr_limpet, aes(x = date,  y = IBR)) + geom_errorbar(aes(ymin = IBR-SD, ymax = IBR+SD), width = 0.2) +  xlab("Date") +  ylab("IBR pour Mimachlamys varia")
+  # 
+  # pm <- (p1 + p2) + plot_annotation(title = "Évaluation du risque écologique lors de la biosurveillance\nréalisée dans le projet QUAMPO")  &  theme(plot.title = element_text(hjust = 0.5)) 
+  # # + theme(plot.title = element_text(hjust = 0.5))
+  
+  # pm
+
     
 ```
  

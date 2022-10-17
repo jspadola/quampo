@@ -30,5 +30,5 @@ Imports:
   gridExtra,
   patchwork,
   knitr,
-  dygraphs
+  dygraphs,
 Remotes:
