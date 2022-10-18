@@ -3,6 +3,7 @@ title: "QUAMPO"
 output: 
   flexdashboard::flex_dashboard:
     storyboard: true
+    orientation: rows
     social: menu
     source: embed
 ---
@@ -50,12 +51,18 @@ Row {data-height=500}
 
 ```
 
-Row {data-height=500}
+Row {.tabset .tabset-fade}
 -------------------------------------
-###
+### Suivi de température des eaux portuaires
 ```{r dy1}
 
 plot_tp(port = "Calvi")
+```
+
+### Interactive Biomarker Response (IBR)
+```{r ibr1}
+
+plot_ibr(port = "Calvi", species = "limpet", spn ="Mimachlamys varia")
 ```
 
 L'Île Rousse
@@ -72,12 +79,20 @@ Row {data-height=500}
     leaflet::addMarkers(data = ports_m[ports_m$id %in% "Ile Rousse",])
 
 ```
-Row {data-height=500}
+
+Row {.tabset .tabset-fade}
 -------------------------------------
-###
+### Suivi de température des eaux portuaires
 ```{r dy2}
 
 plot_tp(port = "Ile Rousse")
+
+```
+
+### Interactive Biomarker Response (IBR)
+```{r ibr2}
+
+plot_ibr(port = "Ile Rousse", species = "limpet", spn ="Mimachlamys varia")
 ```
 
 Saint-Florent
@@ -93,13 +108,22 @@ Row {data-height=500}
     leaflet::addMarkers(data = ports_m[ports_m$id %in% "Saint-Florent",])
 
 ```
-Row {data-height=500}
+
+Row {.tabset .tabset-fade}
 -------------------------------------
-###
+### Suivi de température des eaux portuaires
 ```{r dy3}
 
 plot_tp(port = "Saint-Florent")
 ```
+
+### Interactive Biomarker Response (IBR)
+
+```{r ibr3}
+
+plot_ibr(port = "Saint-Florent", species = "limpet", spn ="Mimachlamys varia")
+```
+
 
 STARESO
 ===================================== 
@@ -115,14 +139,20 @@ leaflet::leaflet() %>%
 
 ```
 
-Row {data-height=500}
+Row {.tabset .tabset-fade}
 -------------------------------------
-###
+### Suivi de température des eaux portuaires
 ```{r dy4}
 
 plot_tp(port = "STARESO")
 ```
 
+### Interactive Biomarker Response (IBR)
+
+```{r ibr4}
+
+plot_ibr(port = "STARESO", species = "limpet", spn ="Mimachlamys varia")
+```
 
 
 Information {data-orientation=rows data-icon="fa-info-circle"}

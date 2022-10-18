@@ -78,6 +78,8 @@
     # correct
     taxref <- as.data.frame(lapply(taxref, function(x) tolower(x)))
     
+    taxref
+    
   }#eo data_taxref
   
   #' Import the data about the fieldwork
