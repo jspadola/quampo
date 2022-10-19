@@ -51,18 +51,25 @@ Row {data-height=500}
 
 ```
 
-Row {.tabset .tabset-fade}
--------------------------------------
-### Suivi de température des eaux portuaires
+### 
 ```{r dy1}
 
 plot_tp(port = "Calvi")
 ```
 
-### Interactive Biomarker Response (IBR)
-```{r ibr1}
 
-plot_ibr(port = "Calvi", species = "limpet", spn ="Mimachlamys varia")
+Row {.tabset .tabset-fade}
+-------------------------------------
+
+### Interactive Biomarker Response (IBR)
+
+```{r ibr1a}
+
+p1 <- plot_ibr(port = "Calvi", species = "limpet", spn ="Mimachlamys varia")
+p2 <- plot_ibr(port = "Calvi", species = "mussel", spn ="Mimachlamys varia")
+
+plotly::subplot(p1, p2)
+
 ```
 
 L'Île Rousse
@@ -80,14 +87,16 @@ Row {data-height=500}
 
 ```
 
-Row {.tabset .tabset-fade}
--------------------------------------
-### Suivi de température des eaux portuaires
+### 
 ```{r dy2}
 
 plot_tp(port = "Ile Rousse")
 
 ```
+
+
+Row {.tabset .tabset-fade}
+-------------------------------------
 
 ### Interactive Biomarker Response (IBR)
 ```{r ibr2}
@@ -109,13 +118,14 @@ Row {data-height=500}
 
 ```
 
-Row {.tabset .tabset-fade}
--------------------------------------
 ### Suivi de température des eaux portuaires
 ```{r dy3}
 
 plot_tp(port = "Saint-Florent")
 ```
+
+Row {.tabset .tabset-fade}
+-------------------------------------
 
 ### Interactive Biomarker Response (IBR)
 
@@ -139,13 +149,14 @@ leaflet::leaflet() %>%
 
 ```
 
-Row {.tabset .tabset-fade}
--------------------------------------
 ### Suivi de température des eaux portuaires
 ```{r dy4}
 
 plot_tp(port = "STARESO")
 ```
+
+Row {.tabset .tabset-fade}
+-------------------------------------
 
 ### Interactive Biomarker Response (IBR)
 

@@ -209,17 +209,18 @@
   data_fos <- function() {
     
     # path
-    fos_path <- here::here("data/wibe/Field_organisms_samples.csv")
+    fos_path <- here::here("data/wibe/Field_organisms_samples.xlsx")
     
     # import wdd data
-    fos <- read.csv(fos_path, header = TRUE, sep = ";")
+    fos <- as.data.frame(readxl::read_xlsx(fos_path))
+    
+    fos <- fos[grepl("QUAMPO", fos$Former_organisms_ID),]
+    
     
     # lower colnames
     names(fos) <- tolower(names(fos))
     
     # correct
-    fos <- as.data.frame(lapply(fos, function(x) tolower(x)))
-    fos <- as.data.frame(lapply(fos, function(x)  gsub("'", "_", x)))
     fos <- as.data.frame(lapply(fos, function(x)  gsub(" ", "_", x)))
     fos <- as.data.frame(lapply(fos, function(x)  gsub(".", "", x, fixed = TRUE)))
     
@@ -227,6 +228,18 @@
     
   }#eo data_fos
   
+  data_effect <- function() {
+    
+    # path
+    org_ef_path <- here::here("data/wibe/Lab_organisms_biomarkers_of_effect_measurements.xlsx")
+    
+    
+    # import wdd data
+    org_ef <- as.data.frame(readxl::read_xlsx(org_ef_path))
+    org_ef <- org_ef[grepl("QUAMPO", org_ef$Former_organisms_ID),]
+
+    
+  }
   
 ################################################################################
 ################################################################################
