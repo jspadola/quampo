@@ -201,6 +201,15 @@
   }#eo data_wsm
   
   
+  load_wsm <- function() {
+    
+    path <- here::here("data/wsm_data.RDS")
+    
+    readRDS(path)
+    
+  }#eo load_wsm
+  
+  
   #' Import field organisms samples data
   #'
   #' @return data about field organisms samples data
@@ -238,7 +247,7 @@
     org_ef <- as.data.frame(readxl::read_xlsx(org_ef_path))
     org_ef <- org_ef[grepl("QUAMPO", org_ef$Former_organisms_ID),]
 
-    
+    org_ef
   }
   
 ################################################################################
@@ -352,3 +361,16 @@
   #     dplyr::filter(site == input$port)
   # })
   # 
+
+  
+  # devtools::load_all()
+  # 
+  # wsm <- load_wsm()
+  # 
+  # var <- grepl("water_subsurface", names(wsm))
+  # var <- grepl(globals()$metal_abr, names(wsm), fixed = TRUE)
+  # 
+  # wsm[,var]
+  # 
+  # summary(wsm[,var])
+  # summary(data.frame(apply(wsm[,var], 2, function(x) as.numeric(x))))
